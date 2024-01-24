@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export const PayLoan = ({ dispatch, state }) => {
   // this local state allows me to clear the input field to give
@@ -8,6 +8,8 @@ export const PayLoan = ({ dispatch, state }) => {
   const cantPayLoan = () => {
     if (!state.insufficientFunds) setUiText("");
   };
+
+
   return (
     <p className="user-inputs user-inputs__payLoan">
       <input
@@ -26,7 +28,7 @@ export const PayLoan = ({ dispatch, state }) => {
       />
       <button
         className={
-          state.isActive
+          state.isActive 
             ? `action-btn action-btn--1`
             : `action-btn--disabled action-btn--1 `
         }

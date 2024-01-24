@@ -37,7 +37,7 @@ const initialState = {
   depositAmount: null,
   loanRequestAmount: null,
   loanPayAmount: null,
-  eligbleForLoan: true,
+  eligibleForLoan: true,
   insufficientFunds: false,
 };
 
@@ -65,19 +65,20 @@ const reducer = (state, action) => {
       return { ...state, withdrawAmount: state.balance };
 
     case "requestLoan":
+      if(!state.eligibleForLoan) return {...state}
       return {
         ...state,
 
         balance: state.balance + state.loanRequestAmount,
         loan: state.loan + state.loanRequestAmount,
         loanRequestAmount: null,
-        eligbleForLoan: false,
+        eligibleForLoan: false,
       };
     case "loanRequestAmount":
       return { ...state, loanRequestAmount: action.payload };
 
     case "payLoan":
-      if (state.balance > state.loanPayAmount)
+      if (state.balance >= state.loanPayAmount)
         return {
           ...state,
           balance:
@@ -92,12 +93,15 @@ const reducer = (state, action) => {
               ? state.loan - state.loanPayAmount
               : 0,
           loanPayAmount: null,
+          eligibleForLoan: state.loan - state.loanPayAmount <= 0 ? true : state.eligibleForLoan
         };
       else return { ...state, insufficientFunds: true };
     case "payLoanAmount":
       return { ...state, loanPayAmount: action.payload };
     case "payOffLoan":
       return { ...state, loanPayAmount: state.loan };
+    case "denyLoan":
+      return { ...state, eligibleForLoan: false };
     case "insufficeintFundsAlert":
       return { ...state, insufficientFunds: false, loanPayAmount: null };
     case "closeAccount":
@@ -113,10 +117,11 @@ export default function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
   console.log(state);
 
+
   return (
     <>
       <Header state={state} />
-      
+
       <Main>
         {" "}
         <OpenAccount state={state} dispatch={dispatch} />
