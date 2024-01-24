@@ -1,5 +1,5 @@
 import { useEffect, useReducer } from "react";
-import "./styles.css";
+import "./css/style.css";
 import { Header } from "./layout/Header";
 import { OpenAccount } from "./components/OpenAccount";
 import { Deposit } from "./components/Deposit";
@@ -8,7 +8,8 @@ import { LoanRequest } from "./components/LoanRequest";
 import { PayLoan } from "./components/PayLoan";
 import { CloseAccount } from "./components/CloseAccount";
 import { Alert } from "./components/Alert";
-import {useKey} from "./customHooks/useKey";
+import { useKey } from "./customHooks/useKey";
+import { Main } from "./layout/Main";
 
 /*
 INSTRUCTIONS / CONSIDERATIONS:
@@ -61,7 +62,7 @@ const reducer = (state, action) => {
     case "withdrawAmount":
       return { ...state, withdrawAmount: action.payload };
     case "withdrawAll":
-      return { ...state, withdrawAmount: state.balance};
+      return { ...state, withdrawAmount: state.balance };
 
     case "requestLoan":
       return {
@@ -112,17 +113,21 @@ export default function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
   console.log(state);
 
-
   return (
-    <div className="App">
+    <>
       <Header state={state} />
-      <OpenAccount state={state} dispatch={dispatch} />
-      <Deposit state={state} dispatch={dispatch} />
-      <Withdrawl state={state} dispatch={dispatch} />
-      <LoanRequest state={state} dispatch={dispatch} />
-      <PayLoan state={state} dispatch={dispatch} />
-      <CloseAccount state={state} dispatch={dispatch} />
+      
+      <Main>
+        {" "}
+        <OpenAccount state={state} dispatch={dispatch} />
+        <Deposit state={state} dispatch={dispatch} />
+        <Withdrawl state={state} dispatch={dispatch} />
+        <LoanRequest state={state} dispatch={dispatch} />
+        <PayLoan state={state} dispatch={dispatch} />
+        <CloseAccount state={state} dispatch={dispatch} />
+      </Main>
+
       <Alert dispatch={dispatch} state={state} />
-    </div>
+    </>
   );
 }

@@ -1,0 +1,30 @@
+@use "../abstracts/" as *;
+
+.user-inputs {
+  width: 15rem;
+  margin: 2rem auto;
+  text-align: center;
+  & .input-area {
+    text-align: center;
+  }
+}
+
+.action-btn {
+  margin: 1rem auto;
+  width: 100%;
+  background-color: $color-primary;
+  color: $color-whitesmoke;
+
+  &--disabled {
+    background-color: $color-light_grey300;
+    margin: 1rem auto;
+    width: 100%;
+    color: $color-whitesmoke;
+  }
+
+  &--1 {
+  }
+  &--2 {
+    margin: 0.5rem auto;
+  }
+}

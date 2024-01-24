@@ -1,0 +1,30 @@
+@use "../abstracts/" as *;
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+  scroll-behavior: smooth;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  background: $color-light_grey200;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+button {
+  cursor: pointer;
+}

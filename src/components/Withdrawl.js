@@ -5,8 +5,9 @@ export const Withdrawl = ({ dispatch, state }) => {
   // a better UX
   const [uiText, setUiText] = useState("");
   return (
-    <p>
+    <p className="user-inputs user-inputs__withdrawl">
       <input
+        className="input-area"
         disabled={state.isActive ? false : true}
         value={uiText}
         type="text"
@@ -21,6 +22,12 @@ export const Withdrawl = ({ dispatch, state }) => {
         //  onClick={() => {}} disabled={isActive ? false : true}
       />
       <button
+        className={
+          state.isActive
+            ? `action-btn action-btn--2`
+            : `action-btn--disabled action-btn--2 `
+        }
+        // className="action-btn action-btn--2"
         onClick={() => {
           dispatch({ type: "withdraw" });
           setUiText("");
@@ -30,6 +37,11 @@ export const Withdrawl = ({ dispatch, state }) => {
         Withdraw ${state.withdrawAmount}
       </button>
       <button
+        className={
+          state.isActive
+            ? `action-btn action-btn--2`
+            : `action-btn--disabled action-btn--2 `
+        }
         onClick={() => {
           dispatch({ type: "withdrawAll" });
           setUiText(state.balance);

@@ -5,8 +5,9 @@ export const LoanRequest = ({ dispatch, state }) => {
   // a better UX
   const [uiText, setUiText] = useState("");
   return (
-    <p>
+    <p className="user-inputs user-inputs__loanRequest">
       <input
+        className="input-area"
         disabled={state.isActive ? false : true}
         value={uiText}
         type="text"
@@ -21,6 +22,11 @@ export const LoanRequest = ({ dispatch, state }) => {
       />
 
       <button
+        className={
+          state.isActive
+            ? `action-btn action-btn--1`
+            : `action-btn--disabled action-btn--1 `
+        }
         onClick={() => {
           dispatch({ type: "requestLoan" });
           setUiText("");

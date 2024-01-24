@@ -1,0 +1,12 @@
+@use "../abstracts/" as *;
+
+.open-account, .close-account {
+ 
+    display: flex;
+    justify-content: center;
+    margin: 1rem;
+
+    &__button {
+        padding: .25rem .5rem;
+    }
+}

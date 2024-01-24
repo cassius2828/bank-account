@@ -9,8 +9,9 @@ export const PayLoan = ({ dispatch, state }) => {
     if (!state.insufficientFunds) setUiText("");
   };
   return (
-    <p>
+    <p className="user-inputs user-inputs__payLoan">
       <input
+        className="input-area"
         disabled={state.isActive ? false : true}
         value={uiText}
         type="text"
@@ -24,6 +25,11 @@ export const PayLoan = ({ dispatch, state }) => {
         }}
       />
       <button
+        className={
+          state.isActive
+            ? `action-btn action-btn--1`
+            : `action-btn--disabled action-btn--1 `
+        }
         onClick={() => {
           dispatch({ type: "payLoan" });
           cantPayLoan();
@@ -33,6 +39,11 @@ export const PayLoan = ({ dispatch, state }) => {
         Pay back ${state.loanPayAmount} of your loan
       </button>{" "}
       <button
+        className={
+          state.isActive
+            ? `action-btn action-btn--1`
+            : `action-btn--disabled action-btn--1 `
+        }
         onClick={() => {
           setUiText(state.loan);
           dispatch({ type: "payOffLoan" });

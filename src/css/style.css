@@ -1,0 +1,91 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+  scroll-behavior: smooth;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  background: #e5e5e5;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+button {
+  cursor: pointer;
+}
+
+.user-inputs {
+  width: 15rem;
+  margin: 2rem auto;
+  text-align: center;
+}
+.user-inputs .input-area {
+  text-align: center;
+}
+
+.action-btn {
+  margin: 1rem auto;
+  width: 100%;
+  background-color: #e1090a;
+  color: whitesmoke;
+}
+.action-btn--disabled {
+  background-color: #bfbfbf;
+  margin: 1rem auto;
+  width: 100%;
+  color: whitesmoke;
+}
+.action-btn--2 {
+  margin: 0.5rem auto;
+}
+
+.open-account, .close-account {
+  display: flex;
+  justify-content: center;
+  margin: 1rem;
+}
+.open-account__button, .close-account__button {
+  padding: 0.25rem 0.5rem;
+}
+
+.header--container__content {
+  display: flex;
+  background-color: #e1090a;
+  width: 100vw;
+  padding: 1rem;
+  color: whitesmoke;
+}
+.header--title {
+  font-size: 3rem;
+  margin-left: 2rem;
+}
+.header-details {
+  display: flex;
+  justify-content: center;
+  margin: 1rem;
+}
+
+.main {
+  display: inline-block;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80vw;
+  text-align: center;
+}
+
+/*# sourceMappingURL=style.css.map */
