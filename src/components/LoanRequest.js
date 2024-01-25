@@ -14,6 +14,7 @@ export const LoanRequest = ({ dispatch, state }) => {
     <p className="user-inputs user-inputs__loanRequest">
       <input
         className="input-area"
+        // the disabled attr based on isActive is for functionality
         disabled={state.isActive && state.eligibleForLoan ? false : true}
         value={uiText}
         type="text"
@@ -29,6 +30,7 @@ export const LoanRequest = ({ dispatch, state }) => {
 
       <button
         className={
+          // the class changed based on isActive is for a better UI
           state.isActive && state.eligibleForLoan
             ? `action-btn action-btn--1`
             : `action-btn--disabled action-btn--1 `
@@ -37,6 +39,7 @@ export const LoanRequest = ({ dispatch, state }) => {
           dispatch({ type: "requestLoan" });
           setUiText("");
         }}
+        // the disabled attr based on isActive is for functionality
         disabled={state.isActive && state.eligibleForLoan ? false : true}
       >
         Request a loan of ${state.loanRequestAmount}

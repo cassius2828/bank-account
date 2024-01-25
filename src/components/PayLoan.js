@@ -9,11 +9,11 @@ export const PayLoan = ({ dispatch, state }) => {
     if (!state.insufficientFunds) setUiText("");
   };
 
-
   return (
     <p className="user-inputs user-inputs__payLoan">
       <input
         className="input-area"
+        // the disabled attr based on isActive is for functionality
         disabled={state.isActive ? false : true}
         value={uiText}
         type="text"
@@ -28,7 +28,8 @@ export const PayLoan = ({ dispatch, state }) => {
       />
       <button
         className={
-          state.isActive 
+          // the class changed based on isActive is for a better UI
+          state.isActive
             ? `action-btn action-btn--1`
             : `action-btn--disabled action-btn--1 `
         }
@@ -42,6 +43,7 @@ export const PayLoan = ({ dispatch, state }) => {
       </button>{" "}
       <button
         className={
+          // the class changed based on isActive is for a better UI
           state.isActive
             ? `action-btn action-btn--1`
             : `action-btn--disabled action-btn--1 `
@@ -50,6 +52,7 @@ export const PayLoan = ({ dispatch, state }) => {
           setUiText(state.loan);
           dispatch({ type: "payOffLoan" });
         }}
+        // the disabled attr based on isActive is for functionality
         disabled={state.isActive ? false : true}
       >
         Pay off your loan

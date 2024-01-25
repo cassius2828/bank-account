@@ -1,12 +1,13 @@
-@use "../abstracts/variables" as *;
+@use "../abstracts" as *;
 
 .header {
-
-  
   &--container__content {
+    position: fixed;
+    top: 0;
     display: flex;
     background-color: $color-primary;
     width: 100vw;
+    height: 5rem;
     padding: 1rem;
     color: $color-whitesmoke;
   }
@@ -19,5 +20,8 @@
     display: flex;
     justify-content: center;
     margin: 1rem;
+    &:first-child {
+      padding-top: 5rem;
+    }
   }
 }

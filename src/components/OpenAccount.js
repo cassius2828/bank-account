@@ -2,7 +2,7 @@ import React from "react";
 import { useKey } from "../customHooks/useKey";
 
 export const OpenAccount = ({ dispatch }) => {
-  // closing account with esc key
+  // open account with enter key
   useKey("enter", () => dispatch({ type: "openAccount" }));
   return (
     <p className="open-account">

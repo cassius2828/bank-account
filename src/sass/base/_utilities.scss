@@ -20,11 +20,18 @@
     margin: 1rem auto;
     width: 100%;
     color: $color-whitesmoke;
+    cursor: not-allowed;
   }
-
-  &--1 {
-  }
+  // if there are 2 buttons for the input category then I want them to be closer together vertically
   &--2 {
     margin: 0.5rem auto;
+  }
+}
+
+.close-account__btn {
+  &--disabled {
+    background-color: $color-light_grey300;
+    color: $color-whitesmoke;
+    cursor: not-allowed;
   }
 }

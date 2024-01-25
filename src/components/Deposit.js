@@ -18,6 +18,7 @@ export const Deposit = ({ dispatch, state }) => {
         }}
       />
       <button
+        // the class changed based on isActive is for a better UI
         className={
           state.isActive
             ? `action-btn action-btn--1`
@@ -28,6 +29,7 @@ export const Deposit = ({ dispatch, state }) => {
           dispatch({ type: "clearDepositAmount" });
           setUiText("");
         }}
+        // the disabled attr based on isActive is for functionality
         disabled={state.isActive ? false : true}
       >
         Deposit ${state.depositAmount}
@@ -35,3 +37,4 @@ export const Deposit = ({ dispatch, state }) => {
     </p>
   );
 };
+

@@ -1,5 +1,6 @@
-import { useEffect, useReducer } from "react";
+import { useReducer } from "react";
 import "./css/style.css";
+//  components
 import { Header } from "./layout/Header";
 import { OpenAccount } from "./components/OpenAccount";
 import { Deposit } from "./components/Deposit";
@@ -7,8 +8,9 @@ import { Withdrawl } from "./components/Withdrawl";
 import { LoanRequest } from "./components/LoanRequest";
 import { PayLoan } from "./components/PayLoan";
 import { CloseAccount } from "./components/CloseAccount";
+import { Footer } from "./layout/Footer";
+//
 import { Alert } from "./components/Alert";
-import { useKey } from "./customHooks/useKey";
 import { Main } from "./layout/Main";
 
 /*
@@ -52,12 +54,14 @@ const reducer = (state, action) => {
     case "clearDepositAmount":
       return { ...state, depositAmount: null };
     case "withdraw":
+      // prevents overdraws
       if (state.balance >= state.withdrawAmount)
         return {
           ...state,
           balance: state.balance - state.withdrawAmount,
           withdrawAmount: null,
         };
+      // triggers insufficient funds alert and resets withdrawAmount
       else return { ...state, insufficientFunds: true, withdrawAmount: null };
     case "withdrawAmount":
       return { ...state, withdrawAmount: action.payload };
@@ -65,23 +69,30 @@ const reducer = (state, action) => {
       return { ...state, withdrawAmount: state.balance };
 
     case "requestLoan":
-      if(!state.eligibleForLoan) return {...state}
+      // prevents requesting a second loan before the first is paid off
+      if (!state.eligibleForLoan) return { ...state };
+
       return {
         ...state,
 
         balance: state.balance + state.loanRequestAmount,
         loan: state.loan + state.loanRequestAmount,
         loanRequestAmount: null,
-        eligibleForLoan: false,
+        // this logic prevents a value of null or 0 to disable the loan eligibility
+        eligibleForLoan: state.loanRequestAmount === null || state.loanRequestAmount === 0 ? true : false,
       };
     case "loanRequestAmount":
       return { ...state, loanRequestAmount: action.payload };
 
     case "payLoan":
+      // prevents overdraw
       if (state.balance >= state.loanPayAmount)
         return {
           ...state,
           balance:
+            // this logic will ensure if the loanPayAmount is more than the loan, then you
+            // will not be overcharged. It adds the extra amount you would have paid back to the
+            // balance, essentially paying off the rest of the loan without overcharging your balance
             state.loan - state.loanPayAmount > -1
               ? state.balance - state.loanPayAmount
               : state.balance -
@@ -89,11 +100,16 @@ const reducer = (state, action) => {
                 (state.loan - state.loanPayAmount) * -1,
 
           loan:
+            // this logic prevents the loan status from ever going into the negative
             state.loan - state.loanPayAmount > -1
               ? state.loan - state.loanPayAmount
               : 0,
           loanPayAmount: null,
-          eligibleForLoan: state.loan - state.loanPayAmount <= 0 ? true : state.eligibleForLoan
+          eligibleForLoan:
+            // this logic resets your loan eligibility once you pay off the loan
+            state.loan - state.loanPayAmount <= 0
+              ? true
+              : state.eligibleForLoan,
         };
       else return { ...state, insufficientFunds: true };
     case "payLoanAmount":
@@ -105,6 +121,7 @@ const reducer = (state, action) => {
     case "insufficeintFundsAlert":
       return { ...state, insufficientFunds: false, loanPayAmount: null };
     case "closeAccount":
+      // prevents closing an account with an active balance or loans
       if (state.balance > 0 || state.loan > 0) return { ...state };
       else return { ...initialState };
 
@@ -115,8 +132,6 @@ const reducer = (state, action) => {
 
 export default function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
-  console.log(state);
-
 
   return (
     <>
@@ -131,8 +146,9 @@ export default function App() {
         <PayLoan state={state} dispatch={dispatch} />
         <CloseAccount state={state} dispatch={dispatch} />
       </Main>
+      <Footer />
 
-      <Alert dispatch={dispatch} state={state} />
+      <Alert state={state} dispatch={dispatch} />
     </>
   );
 }

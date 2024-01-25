@@ -13,7 +13,7 @@ html {
 
 body {
   background: #e5e5e5;
-  overflow-x: hidden;
+  overflow: hidden;
   box-sizing: border-box;
 }
 
@@ -48,24 +48,36 @@ button {
   margin: 1rem auto;
   width: 100%;
   color: whitesmoke;
+  cursor: not-allowed;
 }
 .action-btn--2 {
   margin: 0.5rem auto;
 }
 
-.open-account, .close-account {
+.close-account__btn--disabled {
+  background-color: #bfbfbf;
+  color: whitesmoke;
+  cursor: not-allowed;
+}
+
+.open-account,
+.close-account {
   display: flex;
   justify-content: center;
   margin: 1rem;
 }
-.open-account__button, .close-account__button {
+.open-account__button,
+.close-account__button {
   padding: 0.25rem 0.5rem;
 }
 
 .header--container__content {
+  position: fixed;
+  top: 0;
   display: flex;
   background-color: #e1090a;
   width: 100vw;
+  height: 5rem;
   padding: 1rem;
   color: whitesmoke;
 }
@@ -78,7 +90,55 @@ button {
   justify-content: center;
   margin: 1rem;
 }
+.header-details:first-child {
+  padding-top: 5rem;
+}
 
+#footer {
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  width: 100vw;
+  height: 4.5rem;
+  padding: 1.5rem;
+  background-color: #e1090a;
+  color: whitesmoke;
+  font-size: 1.1rem;
+}
+#footer a {
+  text-decoration: none;
+  color: whitesmoke;
+  transition: 0.2s all ease-out;
+}
+#footer a:hover {
+  transform: scale(1.05);
+}
+
+.icon-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 8rem;
+}
+
+.icon {
+  transition: 0.2s all ease-out;
+}
+.icon:hover {
+  transform: scale(1.1);
+}
+
+@media (min-width: 500px) {
+  #footer {
+    font-size: 1.5rem;
+  }
+  .icon-container {
+    width: 15rem;
+  }
+}
 .main {
   display: inline-block;
   position: relative;
