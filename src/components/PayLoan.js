@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 
 export const PayLoan = ({ dispatch, state }) => {
   // this local state allows me to clear the input field to give
